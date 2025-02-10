@@ -85,3 +85,18 @@ class Invoice(BaseModel):
     @property
     def ammount_total(self):
         return sum(transaction.ammount for transaction in self.transactions)
+
+
+class WeatherBase(SQLModel):
+    city_name : str = Field(default=None)
+    date  : str = Field(default=None)
+    temp_max : float = Field(default=None)
+    temp_min : float = Field(default=None)
+    lat: float = Field(default=None)
+    lon: float = Field(default=None)
+
+class WeatherCreate(CustomerBase):
+    pass
+
+class Weather(WeatherBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)

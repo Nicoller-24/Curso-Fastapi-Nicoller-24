@@ -8,14 +8,15 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from sqlmodel import select
 
 from db import SessionDep, create_all_tables
-from models import Invoice, Transaction
+from models import Invoice
 
-from .routers import customers, plans, transactions
+from .routers import customers, plans, transactions, weather
 
 app = FastAPI(lifespan=create_all_tables)
 app.include_router(customers.router)
 app.include_router(transactions.router)
 app.include_router(plans.router)
+app.include_router(weather.router)
 
 
 @app.middleware("http")
