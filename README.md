@@ -1,6 +1,6 @@
 # FastAPI con SQLModel
 
-Este proyecto implementa una API utilizando FastAPI y SQLModel para manejar clientes, transacciones, planes de suscripción y obtener datos climáticos mediante la Weather API.
+Este proyecto implementa una API utilizando FastAPI y SQLModel para manejar clientes, transacciones, planes de suscripción y datos meteorológicos.
 
 ## Requisitos previos
 
@@ -8,7 +8,6 @@ Este proyecto implementa una API utilizando FastAPI y SQLModel para manejar clie
 - FastAPI
 - SQLModel
 - Uvicorn
-- Requests (para consumir la Weather API)
 
 ## Instalación
 
@@ -70,12 +69,12 @@ La API estará disponible en `http://127.0.0.1:8000` y la documentación interac
 ```json
 {
   "id": 1,
-  "city_name": "New York",
-  "date": "2024-02-10",
-  "temp_max": 15.5,
-  "temp_min": 7.2,
-  "lat": 40.7128,
-  "lon": -74.0060
+  "city_name": "Madrid",
+  "date": "2024-02-10 12:00:00",
+  "temp_max": 25.3,
+  "temp_min": 15.8,
+  "lat": 40.4168,
+  "lon": -3.7038
 }
 ```
 
@@ -124,14 +123,6 @@ curl -X 'GET' \
   -H 'Accept: application/json'
 ```
 
-### Obtener el Clima de una Ciudad
-
-```sh
-curl -X 'GET' \
-  'http://127.0.0.1:8000/weather?city_name=New%20York' \
-  -H 'Accept: application/json'
-```
-
 ### Suscribir Cliente a un Plan
 
 ```sh
@@ -140,9 +131,38 @@ curl -X 'POST' \
   -H 'Accept: application/json'
 ```
 
+## Endpoints del Clima
+
+### Obtener todos los registros de clima guardados
+```sh
+curl -X 'GET' \
+  'http://127.0.0.1:8000/weather' \
+  -H 'Accept: application/json'
+```
+
+### Obtener el clima actual de una ubicación específica
+```sh
+curl -X 'GET' \
+  'http://127.0.0.1:8000/weather/{lat}/{lon}/{cnt}' \
+  -H 'Accept: application/json'
+```
+- `lat`: Latitud de la ubicación
+- `lon`: Longitud de la ubicación
+- `cnt`: Número de registros a obtener
+
+### Guardar el día más caluroso en la base de datos
+```sh
+curl -X 'POST' \
+  'http://127.0.0.1:8000/save_weather/{lat}/{lon}/{cnt}' \
+  -H 'Accept: application/json'
+```
+
+### Eliminar un registro de clima por ID
+```sh
+curl -X 'DELETE' \
+  'http://127.0.0.1:8000/weather/{weather_id}' \
+  -H 'Accept: application/json'
+```
+
 📌 **Autor:** Nicolle Rodríguez Laytón
-
-
-
-
 
