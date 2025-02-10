@@ -148,7 +148,7 @@ curl -X 'GET' \
 ```
 - `lat`: Latitud de la ubicación
 - `lon`: Longitud de la ubicación
-- `cnt`: Número de registros a obtener
+- `cnt`: Número de días que se devolverá en la respuesta
 
 ### Guardar el día más caluroso en la base de datos
 ```sh
